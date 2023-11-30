@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esms.mapper.StaffMapper">
+    <!--查找员工信息-->
+    <select id="listStaff" resultType="com.esms.entity.Staff">
+        select s.*, p.primaryInsitutionName, sec.secondInsitutionName, t.thirdInsitutionName
+        from staff s
+                 left join primaryInsitution p on s.primaryInsitutionNum = p.primaryInsitutionNum
+                 left join secondInsitution sec on s.secondInsitutionNum = sec.secondInsitutionNum
+                 left join thirdInsitution t on s.thirdInsitutionNum = t.thirdInsitutionNum
+        where s.state = '已审核'
+    </select>
+
+    <!--根据档案编号查询用户信息-->
+    <select id="getStaff" resultType="com.esms.entity.Staff">
+        select s.*, p.primaryInsitutionName, sec.secondInsitutionName, t.thirdInsitutionName
+        from staff s
+                 left join primaryInsitution p on s.primaryInsitutionNum = p.primaryInsitutionNum
+                 left join secondInsitution sec on s.secondInsitutionNum = sec.secondInsitutionNum
+                 left join thirdInsitution t on s.thirdInsitutionNum = t.thirdInsitutionNum
+        where s.fileNo = #{fileNo} and s.state = '已审核'
+    </select>
+
+    <!--添加员工信息-->
+    <insert id="addStaff" parameterType="com.esms.entity.Staff">
+        insert into staff
+        values (#{fileNo},#{name},#{gender},#{email},#{position},#{title},#{phone},#{mobile},#{address},#{zipCode},#{nationality},#{birthPlace},#{birthday},#{QQ},#{nation},#{religion},#{politics},#{ID},#{SSN},#{age},#{education},#{educationYear},#{major},#{salary},#{bank},#{account},#{speciality},#{hobby},#{resume},#{family},#{note},#{thirdInsitutionNum},#{secondInsitutionNum},#{primaryInsitutionNum},#{registrant},#{registrationTime},#{state})
+    </insert>
+
+    <!--修改员工信息-->
+    <update id="updateStaff" parameterType="com.esms.entity.Staff">
+        update staff set name = #{name}, gender = #{gender}, email = #{email}, title = #{title}, phone = #{phone}, mobile = #{mobile}, address = #{address}, zipCode = #{zipCode}, nationality = #{nationality}, birthPlace = #{birthPlace}, birthday = #{birthday}, QQ = #{QQ}, nation = #{nation}, religion = #{religion}, politics = #{politics}, ID = #{ID}, SSN = #{SSN}, age = #{age}, education = #{education}, educationYear = #{educationYear}, major = #{major}, salary = #{salary}, bank = #{bank}, account = #{account} , speciality = #{speciality}, hobby = #{hobby}, resume = #{resume}, family = #{family}, note = #{note}, registrant = #{registrant}, registrationTime = #{registrationTime}, state = #{state} where fileNo = #{fileNo}
+    </update>
+
+    <!--修改员工状态-->
+    <update id="changeStaff" parameterType="com.esms.entity.Staff">
+        update staff set state = #{state} where fileNo = #{fileNo}
+    </update>
+
+    <!--查找待审核员工信息-->
+    <select id="listProcessStaff" resultType="com.esms.entity.Staff">
+        select s.*, p.primaryInsitutionName, sec.secondInsitutionName, t.thirdInsitutionName
+        from staff s
+                 left join primaryInsitution p on s.primaryInsitutionNum = p.primaryInsitutionNum
+                 left join secondInsitution sec on s.secondInsitutionNum = sec.secondInsitutionNum
+                 left join thirdInsitution t on s.thirdInsitutionNum = t.thirdInsitutionNum
+        where s.state = '待审核'
+    </select>
+
+    <!--查找已删除员工信息-->
+    <select id="listDeleteStaff" resultType="com.esms.entity.Staff">
+        select s.*, p.primaryInsitutionName, sec.secondInsitutionName, t.thirdInsitutionName
+        from staff s
+                 left join primaryInsitution p on s.primaryInsitutionNum = p.primaryInsitutionNum
+                 left join secondInsitution sec on s.secondInsitutionNum = sec.secondInsitutionNum
+                 left join thirdInsitution t on s.thirdInsitutionNum = t.thirdInsitutionNum
+        where s.state = '已删除'
+    </select>
+
+    <!--根据档案编号查找待审核员工-->
+    <select id="getProcessStaff" resultType="com.esms.entity.Staff">
+        select s.*, p.primaryInsitutionName, sec.secondInsitutionName, t.thirdInsitutionName
+        from staff s
+                 left join primaryInsitution p on s.primaryInsitutionNum = p.primaryInsitutionNum
+                 left join secondInsitution sec on s.secondInsitutionNum = sec.secondInsitutionNum
+                 left join thirdInsitution t on s.thirdInsitutionNum = t.thirdInsitutionNum
+        where s.fileNo = #{fileNo} and s.state = '待审核'
+    </select>
+
+    <!--根据档案编号查找已删除员工-->
+    <select id="getDeleteStaff" resultType="com.esms.entity.Staff">
+        select s.*, p.primaryInsitutionName, sec.secondInsitutionName, t.thirdInsitutionName
+        from staff s
+                 left join primaryInsitution p on s.primaryInsitutionNum = p.primaryInsitutionNum
+                 left join secondInsitution sec on s.secondInsitutionNum = sec.secondInsitutionNum
+                 left join thirdInsitution t on s.thirdInsitutionNum = t.thirdInsitutionNum
+        where s.fileNo = #{fileNo} and s.state = '已删除'
+    </select>
+
+    <!--查找最大档案编号-->
+    <select id="getMaxId" resultType="int">
+        select max(fileNo) from staff
+    </select>
+
+</mapper>

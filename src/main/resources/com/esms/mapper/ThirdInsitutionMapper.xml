@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esms.mapper.ThirdInsitutionMapper">
+    <!--查找三级机构信息-->
+    <select id="listThirdInsitution" resultType="com.esms.entity.ThirdInsitution">
+        select * from thirdInsitution
+    </select>
+
+    <!--根据机构编号查询机构信息-->
+    <select id="getThirdInsitution" resultType="com.esms.entity.ThirdInsitution">
+        select * from thirdInsitution where thirdInsitutionNum = #{thirdInsitutionNum}
+    </select>
+
+    <!--添加机构信息-->
+    <insert id="addThirdInsitution" parameterType="com.esms.entity.ThirdInsitution">
+        insert into thirdInsitution
+        values (#{thirdInsitutionNum},#{thirdInsitutionName},#{secondInsitutionNum})
+    </insert>
+
+    <!--更改机构信息-->
+    <update id="updateThirdInsitution" parameterType="com.esms.entity.ThirdInsitution">
+        update thirdInsitution set thirdInsitutionName = #{thirdInsitutionName} where thirdInsitutionNum = #{thirdInsitutionNum}
+    </update>
+
+    <!--删除机构信息-->
+    <delete id="deleteThirdInsitution" parameterType="int">
+        delete from thirdInsitution where thirdInsitutionNum = #{thirdInsitutionNum}
+    </delete>
+
+    <!--查找三级机构最大档案编号-->
+    <select id="getMaxThirdInsitutionId" resultType="int">
+        select max(thirdInsitutionNum) from thirdInsitution
+    </select>
+</mapper>
