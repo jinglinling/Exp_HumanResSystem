@@ -11,7 +11,19 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!--开启注解支持-->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <!-- 配置Fastjson支持 -->
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json</value>
+                        <value>text/html;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <!--默认的静态资源-->
     <mvc:default-servlet-handler/>
