@@ -13,6 +13,15 @@ public class User {
     private String userName;
     private String userPassword;
     private int sex;
+    
+    public User(int UID, String UAcc, String UName, String UPassWd, int Gender)
+    {
+    	setUserID(UID);
+    	setUserAccount(UAcc);
+    	setUserName(UName);
+    	setUserPassword(UPassWd);
+    	setSex(Gender);
+    }
 
     public int getUserID() {
         return userID;
