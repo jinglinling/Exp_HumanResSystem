@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>首页</title>
+    <title>StaffInfo</title>
     <!-- 引入 Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
     <style>
         body {
             background-color: #e0f7fa;
@@ -52,6 +55,26 @@
         h1 {
             color: #26c6da;
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #80deea;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
@@ -76,12 +99,49 @@
             </li>
         </ul>
         <span class="navbar-text" style="color: #fff;">
-                欢迎来到人力资源系统！
+                欢迎来到员工列表页面！
         </span>
     </div>
 </nav>
+
+<h1>员工信息</h1>
+
+<form action="/staff/listStaff" method="get">
+    <label for="fileNo">fileNo:</label>
+    <input type="text" id="fileNo" name="fileNo">
+    <input type="submit" value="搜索">
+</form>
+
+<table>
+    <tr>
+        <th>档案编号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>一级机构</th>
+        <th>二级机构</th>
+        <th>三级机构</th>
+        <th>职位名称</th>
+        <th>操作</th>
+    </tr>
+    <c:forEach var="staff" items="${staffs}">
+        <tr>
+            <td>${staff.fileNo}</td>
+            <td>${staff.name}</td>
+            <td>${staff.gender}</td>
+            <td>${staff.primaryInsitutionName}</td>
+            <td>${staff.secondInsitutionName}</td>
+            <td>${staff.thirdInsitutionName}</td>
+            <td>${staff.position}</td>
+            <td>
+                <form action="/staff/getStaff/${staff.fileNo}" method="get">
+                    <input type="hidden" name="fileNo" value="${staff.fileNo}">
+                    <input type="submit" value="查看">
+                </form>
+            </td>
+        </tr>
+    </c:forEach>
+</table>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
-

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esms.mapper.PrimaryInsitutionMapper">
+    <!--查找一级机构信息-->
+    <select id="listPrimaryInsitution" resultType="com.esms.entity.PrimaryInsitution">
+        select * from primaryInsitution
+    </select>
+    
+    <!--根据机构编号查询机构信息-->
+    <select id="getPrimaryInsitution" resultType="com.esms.entity.PrimaryInsitution">
+        select * from primaryInsitution where primaryInsitutionNum = #{primaryInsitutionNum}
+    </select>
+    
+    <!--添加机构信息-->
+    <insert id="addPrimaryInsitution" parameterType="com.esms.entity.PrimaryInsitution">
+        insert into primaryInsitution
+        values (#{primaryInsitutionNum},#{primaryInsitutionName})
+    </insert>
+    
+    <!--修改机构信息-->
+    <update id="updatePrimaryInsitution" parameterType="com.esms.entity.PrimaryInsitution">
+        update primaryInsitution set primaryInsitutionName = #{primaryInsitutionName} where primaryInsitutionNum = #{primaryInsitutionNum}
+    </update>
+
+    <!--删除机构信息-->
+    <delete id="deletePrimaryInsitution" parameterType="int">
+        delete from primaryInsitution where primaryInsitutionNum = #{primaryInsitutionNum}
+    </delete>
+</mapper>

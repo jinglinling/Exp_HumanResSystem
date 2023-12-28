@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esms.mapper.SecondInsitutionMapper">
+    <!--查找二级机构信息-->
+    <select id="listSecondInsitution" resultType="com.esms.entity.SecondInsitution">
+        select * from secondInsitution
+    </select>
+
+    <!--根据机构编号查询机构信息-->
+    <select id="getSecondInsitution" resultType="com.esms.entity.SecondInsitution">
+        select * from secondInsitution where secondInsitutionNum = #{secondInsitutionNum}
+    </select>
+
+    <!--添加机构信息-->
+    <insert id="addSecondInsitution" parameterType="com.esms.entity.SecondInsitution">
+        insert into secondInsitution
+        values (#{secondInsitutionNum},#{secondInsitutionName},#{primaryInsitutionNum})
+    </insert>
+
+    <!--修改机构信息-->
+    <update id="updateSecondInsitution" parameterType="com.esms.entity.SecondInsitution">
+        update secondInsitution set secondInsitutionName = #{secondInsitutionName} where secondInsitutionNum = #{secondInsitutionNum}
+    </update>
+
+    <!--删除机构信息-->
+    <delete id="deleteSecondInsitution" parameterType="int">
+        delete from secondInsitution where secondInsitutionNum = #{secondInsitutionNum}
+    </delete>
+
+    <!--获取一级机构对应的二级机构-->
+    <select id="listSecondInsitutionByPrimaryInsitutionNum" resultType="com.esms.entity.SecondInsitution">
+        select * from SecondInsitution where primaryInsitutionNum = #{primaryInsitutionNum}
+    </select>
+</mapper>
