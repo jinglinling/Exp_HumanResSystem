@@ -13,6 +13,7 @@ public class User {
     private String userName;
     private String userPassword;
     private int sex;
+   // private String userType;
 
     public int getUserID() {
         return userID;

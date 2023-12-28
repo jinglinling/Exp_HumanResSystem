@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esms.mapper.recorddetailedMapper">
+    <insert id="adddetailed" parameterType="com.esms.entity.recorddetailed">
+        insert into recorddetailed(`No`,Name,FileNo)
+        values (#{No},#{Name},#{FileNo})
+    </insert>
+    <select id="getalldetailedbyNo" resultType="com.esms.entity.recorddetailed" parameterType="String">
+        select * from recorddetailed where `No`=#{No}
+    </select>
+</mapper>

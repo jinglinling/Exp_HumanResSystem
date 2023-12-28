@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esms.mapper.standardMapper">
+   <select id="getallstandard" resultType="com.esms.entity.standard">
+       select * from standard
+   </select>
+    <insert id="addstandard" parameterType="com.esms.entity.standard">
+        insert into standard(StandardName,StandardNo,`Date`,Registrant,Total,`Check`,PrimaryWage,Creator)
+        values (#{StandardName},#{StandardNo},#{Date},#{Registrant},#{Total},#{Check},#{PrimaryWage},#{Creator})
+    </insert>
+    <delete id="deletestandard" parameterType="String">
+        delete from standard where StandardNo=#{m}
+    </delete>
+    <update id="updatestandard" parameterType="com.esms.entity.standard">
+        update standard set StandardName=#{StandardName},`Date`=#{Date},Registrant=#{Registrant},
+                            Total=#{Total},`Check`=#{Check},PrimaryWage=#{PrimaryWage},Creator=#{Creator} where StandardNo=#{StandardNo}
+    </update>
+    <select id="getstandardbyNo" parameterType="String" resultType="com.esms.entity.standard">
+        SELECT * from standard where StandardNo=#{No}
+    </select>
+    <select id="getstandardbykeyword" parameterType="String" resultType="com.esms.entity.standard">
+        SELECT * from standard where  (StandardName like #{keyword}) or (Registrant like #{keyword}) or (Creator like #{keyword})
+    </select>
+    <select id="getstandardbyDate" resultType="com.esms.entity.standard">
+        SELECT * from standard where  (`Date` BETWEEN #{before} AND #{after})
+    </select>
+</mapper>

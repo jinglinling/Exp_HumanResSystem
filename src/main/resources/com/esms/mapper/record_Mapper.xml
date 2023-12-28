@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esms.mapper.record_Mapper">
+    <insert id="addrecord" parameterType="com.esms.entity.record_">
+        insert into `user`.`record_` (`No`, `TotalPerson`, `Total`, `First`, `Second`, `Third`, `Check`, `Date`, `Registrant`)
+        values (#{No},#{TotalPerson},#{Total},#{First},#{Second},
+        #{Third},#{Check},#{Date},#{Registrant})
+    </insert>
+    <update id="updaterecord" parameterType="com.esms.entity.record_">
+        update record_
+        set TotalPerson=#{TotalPerson},Total=#{Total},`First`=#{First},`Second`=#{Second},
+            `Third`=#{Third},`Check`=#{Check},`Date`=#{Date},Registrant=#{Registrant}
+        where `No`=#{No}
+    </update>
+    <delete id="deleterecord" parameterType="String">
+        delete from record_ where `No`=#{No}
+    </delete>
+    <select id="getallrecord" resultType="com.esms.entity.record_">
+        select * from record_
+    </select>
+</mapper>

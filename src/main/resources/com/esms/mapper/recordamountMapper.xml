@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esms.mapper.recordamountMapper">
+    <select id="getallWage" parameterType="String" resultType="Integer">
+        select Amount from recordamount where `No`=#{No}
+    </select>
+    <select id="getWagebyid" resultType="com.esms.entity.recordamount">
+        select * from recordamount where `No`=#{No} and Name=#{Name}
+    </select>
+    <insert id="addWage" parameterType="com.esms.entity.recordamount">
+        insert into recordamount(`No`,Name,WageName,Amount)
+        values (#{No},#{Name},#{WageName},#{Amount})
+    </insert>
+    <update id="updateWage" parameterType="com.esms.entity.recordamount">
+        update recordamount set Amount=#{Amount}
+                            where `No`=#{No} and Name=#{Name} and WageName=#{WageName}
+    </update>
+</mapper>

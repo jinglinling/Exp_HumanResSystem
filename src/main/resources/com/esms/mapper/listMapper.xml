@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esms.mapper.listMapper">
+    <select id="getWage" resultType="com.esms.entity.list">
+    select * from list
+    </select>
+    <insert id="addWage" parameterType="com.esms.entity.list">
+        insert into list
+        values (#{WageName})
+    </insert>
+    <delete id="deleteWage" parameterType="String">
+        delete from list where WageName=#{m}
+    </delete>
+</mapper>
